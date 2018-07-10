@@ -356,7 +356,8 @@ client.on('message', msg => {
 			default:
 				msg.reply('無此資料');
 				break;
-		}
+			}
+		searchflag = false;
 	} else if (content[0] === '!t') {
 		switch (content[1]) {
 			case '20':
@@ -645,8 +646,8 @@ client.on('message', msg => {
 				msg.reply('無此資料');
 				break;
 		}
+		searchflag = false;
 	}
-	searchflag = false;
 	setTimeout(function () {
 		searchflag = true;
 	},limitsearchtime);
