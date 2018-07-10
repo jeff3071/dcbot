@@ -149,7 +149,7 @@ client.on('message', msg => {
 });
 
 let searchflag = true;
-const limitsearchtime = 3000;
+const limitsearchtime = 1000;
 
 client.on('message', async msg => {
 	if (msg.author.bot) return;
