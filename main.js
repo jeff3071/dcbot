@@ -148,9 +148,16 @@ client.on('message', msg => {
 	}
 });
 
+let searchflag = true;
+const limitsearchtime = 3000;
+
 client.on('message', msg => {
 	if (msg.author.bot) return;
 	if (msg.channel.id !== gfchannel) return;
+	if (!searchflag) {
+		msg.reply('冷卻中');
+		return;
+	}
 
 	const content = msg.content.split(" ", 2);
 
@@ -639,7 +646,10 @@ client.on('message', msg => {
 				break;
 		}
 	}
-
+	searchflag = false;
+	setTimeout(function () {
+		searchflag = true;
+	},limitsearchtime);
 });
 
 client.login('NDUxMzQ0NTI5MzgwMDgxNjY0.DfAbkw.NImd6TOviZ2l0QXeUnrZRu8M_VA');
