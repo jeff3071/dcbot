@@ -151,11 +151,14 @@ client.on('message', msg => {
 let searchflag = true;
 const limitsearchtime = 3000;
 
-client.on('message', msg => {
+client.on('message', async msg => {
 	if (msg.author.bot) return;
 	if (msg.channel.id !== gfchannel) return;
 	if (!searchflag) {
 		msg.reply('冷卻中').then(message => { message.delete(limitsearchtime)});
+		setTimeout(function () {
+			msg.delete(limitsearchtime);
+		}, limitsearchtime);
 		return;
 	}
 
@@ -355,6 +358,9 @@ client.on('message', msg => {
 				break;
 			default:
 				msg.reply('無此資料').then(message => { message.delete(limitsearchtime) });
+				setTimeout(function () {
+					msg.delete(limitsearchtime);
+				}, limitsearchtime);
 				break;
 			}
 		searchflag = false;
