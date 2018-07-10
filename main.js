@@ -69,7 +69,7 @@ function generateans(){
 
 function endgame(){
 	count = 10;
-	flag = false;
+	gameflag = false;
 	solvetimesec = 0;
 	stopchecktime();
 	stopcounttime();
@@ -89,7 +89,7 @@ function stopcounttime(){
 
 function startchecktime(msg){
 	time = setTimeout(function(){
-		flag = false;
+		gameflag = false;
 		endgame();
 		msg.reply('逾時回應');
 	},limitTime);
@@ -107,7 +107,7 @@ client.on('message', msg => {
 	const content = msg.content;
 	const num = parseInt(content);
 
-	if(content === '%start' && !flag) {
+	if(content === '%start' && !gameflag) {
 		msg.reply('1A2B遊戲開始\n 請輸入一個四位數字 您共有10次機會');
 		
 		answer = generateans();
@@ -118,7 +118,7 @@ client.on('message', msg => {
 		console.log(answer);
 
 		author = msg.author.id;
-		flag = true;
+		gameflag = true;
 
 		startchecktime(msg);
 
@@ -138,10 +138,10 @@ client.on('message', msg => {
 				startchecktime(msg);
 			}
 		}
-	}else if(content === '%stop' && flag) {
+	}else if(content === '%stop' && gameflag) {
 		msg.reply(`停止遊戲 答案是${answer}`);
 		endgame();
-	}else if(!checkres(msg) && flag) {
+	}else if(!checkres(msg) && gameflag) {
 		msg.reply('請輸入四 位 數 字!');
 		stopchecktime();
 		startchecktime(msg);
@@ -354,7 +354,7 @@ client.on('message', msg => {
 				msg.reply('金高速彈');
 				break;
 			default:
-				msg.reply('無此資料');
+				msg.reply('無此資料').then(message => { message.delete(limitsearchtime) });
 				break;
 			}
 		searchflag = false;
@@ -643,7 +643,7 @@ client.on('message', msg => {
 				msg.reply('5☆SG.AA12');
 				break;
 			default:
-				msg.reply('無此資料');
+				msg.reply('無此資料').then(message => { message.delete(limitsearchtime) });
 				break;
 		}
 		searchflag = false;
