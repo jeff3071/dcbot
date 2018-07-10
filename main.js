@@ -644,7 +644,10 @@ client.on('message', msg => {
 				break;
 			default:
 				msg.reply('無此資料').then(message => { message.delete(limitsearchtime) });
-				msg.then(message => { message.delete(limitsearchtime) });
+
+				setTimeout(function () {
+					msg.delete(limitsearchtime);
+				}, limitsearchtime);
 				break;
 		}
 		searchflag = false;
