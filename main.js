@@ -7,7 +7,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-let flag = false;
+let gameflag = false;
 let author,answer,count = 10;
 const gamechannel = '451387091214139393', gfchannel = '399414118030901248';
 
@@ -34,7 +34,7 @@ function checkres(res){
 	const num = parseInt(content);
 	const rauthor = res.author.id;
 
-	if(content.length !== 4 || !flag || isNaN(num)){
+	if(content.length !== 4 || !gameflag || isNaN(num)){
 		return false;
 	}else{
 		let b = [(num-num%1000)/1000, (num%1000-num%100)/100, (num%100-num%10)/10, (num%10)];
