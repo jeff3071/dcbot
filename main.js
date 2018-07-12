@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const request = require('request');
+const cheerio = require('cheerio');
 const client = new Discord.Client();
 
 client.on('ready', () => {
@@ -99,7 +101,7 @@ function stopchecktime(){
 	clearTimeout(time);
 }
 
-client.on('message', msg => {
+client.on('message', async msg => {
 	// console.log(msg.channel.id)
 	if(msg.author.bot) return;
 	if(msg.channel.id !== gamechannel) return;
@@ -662,5 +664,20 @@ client.on('message', async msg => {
 		searchflag = true;
 	},limitsearchtime);
 });
+
+// let data = request({
+// 	url: 'http://www.gfwiki.org/index.php?title=战术少女（枪种类别）',
+// 	method: 'GET'
+// }, function(e,r,b){
+// 	if(e || !b) return;
+// 	let $ = cheerio.load(b);
+// 	let result = [];
+// 	let imgurl = $('img');
+// 	for(let i = 0;i < imgurl.length; i++){
+// 		result.push($(imgurl[i]).text());
+// 	}
+// 	console.log(imgurl[0]);
+// 	console.log($(imgurl[0]).css('background-image').split('/'));
+// });
 
 client.login('NDUxMzQ0NTI5MzgwMDgxNjY0.DfAbkw.NImd6TOviZ2l0QXeUnrZRu8M_VA');
