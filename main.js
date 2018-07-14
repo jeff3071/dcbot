@@ -699,7 +699,7 @@ client.on('message', async msg => {
 
 	const content = msg.content;
 	const channel = msg.channel;
-	if (content === '抽老婆'){ 
+	if (content === '抽桌布'){ 
 		json.readFile('result.json', function (err, result) {
 			if (err) throw err;
 			// console.log(result.length);
