@@ -107,12 +107,12 @@ client.on('message', async msg => {
 	// console.log(msg.channel.id)
 	if(msg.author.bot) return;
 	if(msg.channel.id !== gamechannel) return;
-	if(msg.author !== author) return;
 
 	const content = msg.content;
 	const num = parseInt(content);
 
 	if(content === '%start' && !gameflag) {
+
 		msg.reply('1A2B遊戲開始\n 請輸入一個四位數字 您共有10次機會');
 		
 		answer = generateans();
@@ -123,6 +123,7 @@ client.on('message', async msg => {
 		console.log(answer);
 
 		author = msg.author.id;
+		if (msg.author !== author) return;
 		gameflag = true;
 
 		startchecktime(msg);
