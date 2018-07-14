@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const request = require('request');
 const cheerio = require('cheerio');
+const fs = require('fs');
+const json = require('jsonfile');
 const client = new Discord.Client();
 
 client.on('ready', () => {
@@ -665,19 +667,48 @@ client.on('message', async msg => {
 	},limitsearchtime);
 });
 
-// let data = request({
-// 	url: 'http://www.gfwiki.org/index.php?title=战术少女（枪种类别）',
-// 	method: 'GET'
-// }, function(e,r,b){
-// 	if(e || !b) return;
-// 	let $ = cheerio.load(b);
-// 	let result = [];
-// 	let imgurl = $('img');
-// 	for(let i = 0;i < imgurl.length; i++){
-// 		result.push($(imgurl[i]).text());
-// 	}
-// 	console.log(imgurl[0]);
-// 	console.log($(imgurl[0]).css('background-image').split('/'));
+// let result = [];
+// const img = new Promise((resolve, reject) => {
+// 		for(let i = 1; i <= 10; i++){
+// 			request({
+// 				url: `https://wall.alphacoders.com/by_sub_category.php?id=241492&name=少女前线+壁纸&lang=Chinese&${page=i}`,
+// 				method: 'GET'
+// 			}, function(e,r,b){
+// 				if(e || !b) return;
+// 				let $ = cheerio.load(b);
+// 				let imgurl = $('.center a img');
+// 				for(let i = 0;i < imgurl.length; i++){
+// 					result.push($(imgurl[i]).attr('src'));
+// 				}
+// 			});
+// 		}
+// 		setTimeout(() => {
+// 			resolve();
+// 		},10000)
+// 	})
+
+// img.then(() => {
+// 	// console.log(result);
+// 	fs.writeFileSync('result.json', JSON.stringify(result));
+// }, (err) => {
+// 	console.log('err');
 // });
 
+client.on('message', async msg => {
+	if (msg.author.bot) return;
+
+	const content = msg.content;
+	const channel = msg.channel;
+	if (content === '抽老婆'){ 
+		json.readFile('result.json', function (err, result) {
+			if (err) throw err;
+			// console.log(result.length);
+			let n = Math.floor(Math.random() * 300);
+			channel.send({
+				files:
+					['https://images6.alphacoders.com/730/730763.png']
+			})
+		});
+	}
+})
 client.login('NDUxMzQ0NTI5MzgwMDgxNjY0.DfAbkw.NImd6TOviZ2l0QXeUnrZRu8M_VA');
