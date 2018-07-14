@@ -124,7 +124,7 @@ client.on('message', async msg => {
 		console.log(answer);
 
 		author = msg.author.id;
-		if (msg.author !== author) return;
+		if (msg.author.id !== author) return;
 		gameflag = true;
 
 		startchecktime(msg);
