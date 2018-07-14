@@ -706,7 +706,7 @@ client.on('message', async msg => {
 			let n = Math.floor(Math.random() * 300);
 			channel.send({
 				files:
-					['https://images6.alphacoders.com/730/730763.png']
+					[result[n]]
 			})
 		});
 	}
