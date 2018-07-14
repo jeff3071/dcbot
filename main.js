@@ -124,12 +124,12 @@ client.on('message', async msg => {
 		console.log(answer);
 
 		author = msg.author.id;
-		if (msg.author.id !== author) return;
 		gameflag = true;
 
 		startchecktime(msg);
 
 	}else if(checkres(msg) && count >= 1) {
+		if (msg.author.id !== author) return;
 		if(num === answer){
 			msg.reply(`恭喜答對 您本次的解題時間為${solvetimesec}秒`);
 			endgame();
@@ -146,9 +146,11 @@ client.on('message', async msg => {
 			}
 		}
 	}else if(content === '%stop' && gameflag) {
+		if (msg.author.id !== author) return;
 		msg.reply(`停止遊戲 答案是${answer}`);
 		endgame();
 	}else if(!checkres(msg) && gameflag) {
+		if (msg.author.id !== author) return;
 		msg.reply('請輸入四 位 數 字!');
 		stopchecktime();
 		startchecktime(msg);
