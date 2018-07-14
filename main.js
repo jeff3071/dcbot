@@ -105,7 +105,7 @@ client.on('message', async msg => {
 	}
 
 	function endgame() {
-		count = 10;
+		count = 20;
 		gameflag = false;
 		solvetimesec = 0;
 		stopchecktime();
