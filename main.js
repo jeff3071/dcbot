@@ -10,7 +10,7 @@ client.on('ready', () => {
 });
 
 let gameflag = false;
-let author,answer,count = 10;
+let author,answer,count = 20;
 const gamechannel = '451387091214139393', gfchannel = '399414118030901248';
 
 function compare(num, ans){
@@ -107,6 +107,7 @@ client.on('message', async msg => {
 	// console.log(msg.channel.id)
 	if(msg.author.bot) return;
 	if(msg.channel.id !== gamechannel) return;
+	if(msg.author !== author) return;
 
 	const content = msg.content;
 	const num = parseInt(content);
@@ -134,7 +135,7 @@ client.on('message', async msg => {
 			let r = compare(num, answer);
 			count--;
 			if(count === 0){
-				msg.reply(`超過10次 停止遊戲 答案是${answer}`);
+				msg.reply(`超過20次 停止遊戲 答案是${answer}`);
 				endgame();
 			}else{
 				msg.reply(`你獲得${r[0]}A${r[1]}B 還剩${count}次機會`);
