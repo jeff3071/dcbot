@@ -2,6 +2,7 @@ let searchflag = true;
 const limitsearchtime = 1000;
 
 module.exports.run = async (bot, msg) => {
+    const content = msg.content;
     if (!searchflag && (content[0] === '!t' || content[0] === '!e') ){
         msg.reply('冷卻中').then(message => { message.delete(limitsearchtime) });
         setTimeout(function () {
