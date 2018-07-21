@@ -45,32 +45,32 @@ Client.on('message', async msg => {
 	search.run(Client, msg);
 });
 
-// let result = [];
-// const imgu = new Promise((resolve, reject) => {
-// 		for(let i = 1; i <= 10; i++){
-// 			request({
-// 				url: `https://mobile.alphacoders.com/by-sub-category/241492?page=${i}`,
-// 				method: 'GET'
-// 			}, function(e,r,b){
-// 				if(e || !b) return;
-// 				let $ = cheerio.load(b);
-// 				let imgurl = $('.center a img');
-// 				for(let i = 0;i < imgurl.length; i++){
-// 					result.push($(imgurl[i]).attr('src'));
-// 				}
-// 			});
-// 		}
-// 		setTimeout(() => {
-// 			resolve();
-// 		},10000)
-// 	})
+let result = [];
+const imgu = new Promise((resolve, reject) => {
+		for(let i = 1; i <= 6; i++){
+			request({
+				url: `https://mobile.alphacoders.com/by-sub-category/241492?page=${i}`,
+				method: 'GET'
+			}, function(e,r,b){
+				if(e || !b) return;
+				let $ = cheerio.load(b);
+				let imgurl = $('.center a img');
+				for(let i = 0;i < imgurl.length; i++){
+					result.push($(imgurl[i]).attr('src'));
+				}
+			});
+		}
+		setTimeout(() => {
+			resolve();
+		},10000)
+	})
 
-// imgu.then(() => {
-// 	console.log(result);
-// 	fs.writeFileSync('result-phone.json', JSON.stringify(result));
-// }, (err) => {
-// 	console.log('err');
-// });
+imgu.then(() => {
+	console.log(result);
+	fs.writeFileSync('result-phone.json', JSON.stringify(result));
+}, (err) => {
+	console.log('err');
+});
 
 Client.on('message', async msg => {
 	if (msg.author.bot) return;
