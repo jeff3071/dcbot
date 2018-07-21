@@ -5,13 +5,15 @@ const json = require('jsonfile');
 module.exports.run = async (bot, msg) => {
     const channel = msg.channel;
 
-    json.readFile('result.json', function (err, result) {
+    json.readFile('result-phone.json', function (err, result) {
         if (err) throw err;
         let n = Math.floor(Math.random() * result.length);
-        channel.send(result[n])
+        channel.send(
+                result[n]
+        )
     });
 }
 
 module.exports.help = {
-    name: 'img'
+    name: 'img-phone'
 }

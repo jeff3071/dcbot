@@ -6,6 +6,7 @@ const fs = require('fs');
 const json = require('jsonfile');
 
 const img = require('./cmds/img');
+const imgphone = require('./cmds/img-phone');
 const game = require('./cmds/game');
 const search = require('./cmds/search');
 
@@ -45,10 +46,10 @@ Client.on('message', async msg => {
 });
 
 // let result = [];
-// const img = new Promise((resolve, reject) => {
+// const imgu = new Promise((resolve, reject) => {
 // 		for(let i = 1; i <= 10; i++){
 // 			request({
-// 				url: `https://wall.alphacoders.com/by_sub_category.php?id=241492&name=少女前线+壁纸&lang=Chinese&${page=i}`,
+// 				url: `https://mobile.alphacoders.com/by-sub-category/241492?page=${i}`,
 // 				method: 'GET'
 // 			}, function(e,r,b){
 // 				if(e || !b) return;
@@ -64,9 +65,9 @@ Client.on('message', async msg => {
 // 		},10000)
 // 	})
 
-// img.then(() => {
+// imgu.then(() => {
 // 	console.log(result);
-// 	fs.writeFileSync('result.json', JSON.stringify(result));
+// 	fs.writeFileSync('result-phone.json', JSON.stringify(result));
 // }, (err) => {
 // 	console.log('err');
 // });
@@ -76,8 +77,12 @@ Client.on('message', async msg => {
 
 	const content = msg.content;
 
-	if (content === '抽桌布'){ 
+	if (content === '抽桌布'){
 		img.run(Client, msg);
+	}
+
+	if (content === '抽手機桌布'){
+		imgphone.run(Client, msg);
 	}
 })
 Client.login('NDUxMzQ0NTI5MzgwMDgxNjY0.DfAbkw.NImd6TOviZ2l0QXeUnrZRu8M_VA');
