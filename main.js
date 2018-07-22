@@ -100,4 +100,4 @@ Client.on('message', async msg => {
 	}
 
 })
-Client.login(process.env.token);
+Client.login(process.env.BOT_TOKEN);
