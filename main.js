@@ -3,6 +3,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const json = require('jsonfile');
+const aws = require('aws-sdk');
 
 const img = require('./cmds/img');
 const imgphone = require('./cmds/img-phone');
