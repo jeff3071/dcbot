@@ -2,13 +2,13 @@ const Discord = require('discord.js');
 const request = require('request');
 const cheerio = require('cheerio');
 const fs = require('fs');
-
 const json = require('jsonfile');
 
 const img = require('./cmds/img');
 const imgphone = require('./cmds/img-phone');
 const game = require('./cmds/game');
 const search = require('./cmds/search');
+const help = require('./cmds/help');
 
 const Client = new Discord.Client({disableEveryone: true});
 
@@ -45,32 +45,32 @@ Client.on('message', async msg => {
 	search.run(Client, msg);
 });
 
-let result = [];
-const imgu = new Promise((resolve, reject) => {
-		for(let i = 1; i <= 6; i++){
-			request({
-				url: `https://mobile.alphacoders.com/by-sub-category/241492?page=${i}`,
-				method: 'GET'
-			}, function(e,r,b){
-				if(e || !b) return;
-				let $ = cheerio.load(b);
-				let imgurl = $('.center a img');
-				for(let i = 0;i < imgurl.length; i++){
-					result.push($(imgurl[i]).attr('src'));
-				}
-			});
-		}
-		setTimeout(() => {
-			resolve();
-		},10000)
-	})
+// let result = [];
+// const imgu = new Promise((resolve, reject) => {
+// 		for(let i = 1; i <= 6; i++){
+// 			request({
+// 				url: `https://mobile.alphacoders.com/by-sub-category/241492?page=${i}`,
+// 				method: 'GET'
+// 			}, function(e,r,b){
+// 				if(e || !b) return;
+// 				let $ = cheerio.load(b);
+// 				let imgurl = $('.center a img');
+// 				for(let i = 0;i < imgurl.length; i++){
+// 					result.push($(imgurl[i]).attr('src'));
+// 				}
+// 			});
+// 		}
+// 		setTimeout(() => {
+// 			resolve();
+// 		},10000)
+// 	})
 
-imgu.then(() => {
-	console.log(result);
-	fs.writeFileSync('result-phone.json', JSON.stringify(result));
-}, (err) => {
-	console.log('err');
-});
+// imgu.then(() => {
+// 	console.log(result);
+// 	fs.writeFileSync('result-phone.json', JSON.stringify(result));
+// }, (err) => {
+// 	console.log('err');
+// });
 
 Client.on('message', async msg => {
 	if (msg.author.bot) return;
@@ -84,5 +84,16 @@ Client.on('message', async msg => {
 	if (content === '抽手機桌布'){
 		imgphone.run(Client, msg);
 	}
+})
+
+Client.on('message', async msg => {
+	if (msg.author.bot) return;
+
+	const content = msg.content;
+
+	if(content === '%help'){
+		help.run(Client, msg);
+	}
+
 })
 Client.login('NDUxMzQ0NTI5MzgwMDgxNjY0.DfAbkw.NImd6TOviZ2l0QXeUnrZRu8M_VA');

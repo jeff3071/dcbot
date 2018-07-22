@@ -8,6 +8,7 @@ module.exports.run = async (bot, msg) => {
     json.readFile('result-phone.json', function (err, result) {
         if (err) throw err;
         let n = Math.floor(Math.random() * result.length);
+        console.log(n);
         channel.send(
                 result[n]
         )
