@@ -9,6 +9,7 @@ const imgphone = require('./cmds/img-phone');
 const game = require('./cmds/game');
 const search = require('./cmds/search');
 const help = require('./cmds/help');
+const data = require('./cmds/data');
 
 const Client = new Discord.Client({disableEveryone: true});
 
@@ -34,7 +35,6 @@ Client.on('message', async msg => {
 	if(msg.author.Client) return;
 	if(msg.channel.id !== gamechannel) return;
 
-	const content = msg.content;
 	game.run(Client, msg);
 });
 
@@ -93,6 +93,9 @@ Client.on('message', async msg => {
 
 	if(content === '%help'){
 		help.run(Client, msg);
+	}
+	if(content === '%data'){
+		data.run(Client, msg);
 	}
 
 })

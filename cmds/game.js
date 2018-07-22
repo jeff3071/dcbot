@@ -1,3 +1,6 @@
+const fs = require('fs');
+const json = require('jsonfile');
+
 let gameflag = false;
 let author, answer, count = 20;
 let time, solvetime, solvetimesec, limitTime = 60000;
@@ -94,11 +97,13 @@ module.exports.run = async (bot, msg) => {
         solvetimesec = 0;
         stopchecktime();
         stopcounttime();
+        console.log("end")
     }
+
     if (content === '%start' && !gameflag) {
 
         msg.reply(`1A2B遊戲開始\n 請輸入一個四位數字 您共有${count}次機會`);
-
+        
         answer = generateans();
 
         solvetimesec = 0;
@@ -107,21 +112,70 @@ module.exports.run = async (bot, msg) => {
         console.log(answer);
 
         author = msg.author.id;
+
+        authorname = msg.author.name;
+
         gameflag = true;
 
         startchecktime(msg);
+
+        json.readFile('data.json', (err, result) => {
+            if(err) throw err;
+            authorid = author.toString();
+            if(!result[authorid]){
+                result[authorid] = {
+                    "success": 0,
+                    "fail": 0,
+                    "timeavg": 0
+                }
+                json.writeFile('data.json', result);
+                console.log('新玩家寫入');
+            }
+            // console.log(success, fail, timeavg);
+        });
+
 
     } else if (checkres(msg) && count >= 1) {
         if (msg.author.id !== author) return;
         if (num === answer) {
             msg.reply(`恭喜答對 您本次的解題時間為${solvetimesec}秒`);
-            endgame();
+            const promise = new Promise((resolve, reject) =>{json.readFile('data.json', (err, result) => {
+                if(err) throw err;
+
+                authorid = author.toString();
+                console.log(solvetimesec);
+                result[authorid]["timeavg"] = Math.floor(((result[authorid]["timeavg"] * result[authorid]["success"]) + solvetimesec) / (result[authorid]["success"] + 1));
+                result[authorid]["success"] = result[authorid]["success"] + 1;
+                json.writeFile('data.json', result);
+                console.log(result);
+                // setTimeout(() => {
+			    //     resolve();
+                // },1000);
+                resolve();
+            })});
+            promise.then(() => { endgame();}, (err) => {
+                console.log(err);
+            });
         } else {
             let r = compare(num, answer);
             count--;
             if (count === 0) {
                 msg.reply(`超過20次 停止遊戲 答案是${answer}`);
-                endgame();
+                const promise = new Promise((resolve, reject) => {
+                    json.readFile('data.json', (err, result) => {
+                        if (err) throw err;
+
+                        authorid = author.toString();
+                        console.log(solvetimesec);
+                        result[authorid]["fail"] = result[authorid]["fail"] + 1;
+                        json.writeFile('data.json', result);
+                        console.log(result);
+                        resolve();
+                    })
+                });
+                promise.then(() => { endgame(); }, (err) => {
+                    console.log(err);
+                });
             } else {
                 msg.reply(`你獲得${r[0]}A${r[1]}B 還剩${count}次機會`);
                 stopchecktime();
@@ -131,7 +185,21 @@ module.exports.run = async (bot, msg) => {
     } else if (content === '%stop' && gameflag) {
         if (msg.author.id !== author) return;
         msg.reply(`停止遊戲 答案是${answer}`);
-        endgame();
+        const promise = new Promise((resolve, reject) => {
+            json.readFile('data.json', (err, result) => {
+                if (err) throw err;
+
+                authorid = author.toString();
+                console.log(solvetimesec);
+                result[authorid]["fail"] = result[authorid]["fail"] + 1;
+                json.writeFile('data.json', result);
+                console.log(result);
+                resolve();
+            })
+        });
+        promise.then(() => { endgame(); }, (err) => {
+            console.log(err);
+        });
     } else if (!checkres(msg) && gameflag) {
         if (msg.author.id !== author) return;
         msg.reply('請輸入四 位 數 字!');
