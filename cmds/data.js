@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg) => {
                     }]
                 }});
         }else{
-            channel.send('無使用者資料');
+            msg.channel.send('無使用者資料');
         }
     })
 }
