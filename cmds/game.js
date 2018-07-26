@@ -1,5 +1,6 @@
 const fs = require('fs');
 const json = require('jsonfile');
+const mongoose = require('mongoose');
 
 let gameflag = false;
 let author, answer, count = 20;
@@ -148,9 +149,6 @@ module.exports.run = async (bot, msg) => {
                 result[authorid]["success"] = result[authorid]["success"] + 1;
                 json.writeFile('data.json', result);
                 console.log(result);
-                // setTimeout(() => {
-			    //     resolve();
-                // },1000);
                 resolve();
             })});
             promise.then(() => { endgame();}, (err) => {

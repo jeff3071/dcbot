@@ -12,6 +12,7 @@ module.exports.run = async (bot, msg) => {
         channel.send(
                 result[n]
         )
+        
     });
 }
 
