@@ -303,6 +303,9 @@ module.exports.run = async (bot, msg) => {
             case '230':
                 msg.reply('5☆SMG.湯姆森 5☆SMG.G36C');
                 break;
+            case '233':
+                msg.reply('5☆SMG.炫風');
+                break;
             case '235':
                 msg.reply('5☆SMG.VECTOR 5☆SMG.79式');
                 break;

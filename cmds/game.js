@@ -1,6 +1,5 @@
 const fs = require('fs');
 const json = require('jsonfile');
-const mongoose = require('mongoose');
 
 let gameflag = false;
 let author, answer, count = 20;
