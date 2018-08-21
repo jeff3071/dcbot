@@ -101,5 +101,5 @@ Client.on('message', async msg => {
 })
 
 const test_token = "NDY1NTUxOTEwOTI2MTU1Nzc4.Dj9LqA.VZa_-RK_2gOp2kdGbSuZ01lYjZo";
-// Client.login(process.env.BOT_TOKEN);
-Client.login(test_token);
+Client.login(process.env.BOT_TOKEN);
+// Client.login(test_token);
