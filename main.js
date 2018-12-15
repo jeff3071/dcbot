@@ -10,6 +10,9 @@ const game = require('./cmds/game');
 const search = require('./cmds/search');
 const help = require('./cmds/help');
 const data = require('./cmds/data');
+const insert = require('./cmds/insert');
+const del = require('./cmds/del');
+
 
 const Client = new Discord.Client({disableEveryone: true});
 
@@ -43,6 +46,8 @@ Client.on('message', async msg => {
 	if (msg.channel.id !== gfchannel) return;
 
 	search.run(Client, msg);
+	insert.run(Client, msg);
+	del.run(Client, msg);
 });
 
 // let result = [];

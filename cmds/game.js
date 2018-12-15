@@ -139,7 +139,8 @@ module.exports.run = async (bot, msg) => {
         if (msg.author.id !== author) return;
         if (num === answer) {
             msg.reply(`恭喜答對 您本次的解題時間為${solvetimesec}秒`);
-            const promise = new Promise((resolve, reject) =>{json.readFile('data.json', (err, result) => {
+            const promise = new Promise((resolve, reject) =>{
+                json.readFile('data.json', (err, result) => {
                 if(err) throw err;
 
                 authorid = author.toString();
