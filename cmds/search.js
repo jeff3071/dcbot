@@ -24,7 +24,12 @@ module.exports.run = async (bot, msg) => {
                 }
                 msg.reply(s);
             }else{
-                msg.reply('查無資料');
+                // msg.reply('查無資料');
+                msg.reply('無此資料').then(message => {
+                    message.delete(limitsearchtime)
+                    msg.delete(limitsearchtime);
+                });
+    
             }
         })
 
