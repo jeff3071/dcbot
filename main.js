@@ -50,44 +50,21 @@ Client.on('message', async msg => {
 	del.run(Client, msg);
 });
 
-// let result = [];
-// const imgu = new Promise((resolve, reject) => {
-// 		for(let i = 1; i <= 6; i++){
-// 			request({
-// 				url: `https://mobile.alphacoders.com/by-sub-category/241492?page=${i}`,
-// 				method: 'GET'
-// 			}, function(e,r,b){
-// 				if(e || !b) return;
-// 				let $ = cheerio.load(b);
-// 				let imgurl = $('.center a img');
-// 				for(let i = 0;i < imgurl.length; i++){
-// 					result.push($(imgurl[i]).attr('src'));
-// 				}
-// 			});
-// 		}
-// 		setTimeout(() => {
-// 			resolve();
-// 		},10000)
-// 	})
-
-// imgu.then(() => {
-// 	console.log(result);
-// 	fs.writeFileSync('result-phone.json', JSON.stringify(result));
-// }, (err) => {
-// 	console.log('err');
-// });
-
 Client.on('message', async msg => {
 	if (msg.author.bot) return;
 
 	const content = msg.content;
 
 	if (content === '抽桌布'){
-		img.run(Client, msg);
+		img.run(Client, msg, 'gf');
 	}
 
 	if (content === '抽手機桌布'){
 		imgphone.run(Client, msg);
+	}
+
+	if (content === '抽蝦蝦'){
+		img.run(Client, msg, 'sh')
 	}
 })
 
@@ -105,6 +82,6 @@ Client.on('message', async msg => {
 
 })
 
-const test_token = "NDY1NTUxOTEwOTI2MTU1Nzc4.Dj9LqA.VZa_-RK_2gOp2kdGbSuZ01lYjZo";
+// const test_token = "NDY1NTUxOTEwOTI2MTU1Nzc4.Dj9LqA.VZa_-RK_2gOp2kdGbSuZ01lYjZo";
 Client.login(process.env.BOT_TOKEN);
 // Client.login(test_token);
