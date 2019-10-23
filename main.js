@@ -5,7 +5,6 @@ const fs = require('fs');
 const json = require('jsonfile');
 
 const img = require('./cmds/img');
-const imgphone = require('./cmds/img-phone');
 const game = require('./cmds/game');
 const search = require('./cmds/search');
 const help = require('./cmds/help');
@@ -55,17 +54,14 @@ Client.on('message', async msg => {
 
 	const content = msg.content;
 
-	if (content === '抽桌布'){
+	if (content === '抽少前'){
 		img.run(Client, msg, 'gf');
-	}
-
-	if (content === '抽手機桌布'){
-		imgphone.run(Client, msg);
 	}
 
 	if (content === '抽蝦蝦'){
 		img.run(Client, msg, 'sh')
 	}
+
 })
 
 Client.on('message', async msg => {

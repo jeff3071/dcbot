@@ -6,10 +6,10 @@ module.exports.run = async (bot, msg, c) => {
     const channel = msg.channel;
     if(c === 'gf'){
 
-        json.readFile('result.json', function (err, result) {
+        json.readFile('data/gf.json', function (err, result) {
             if (err) throw err;
             let n = Math.floor(Math.random() * result.length);
-            channel.send(result[n])
+            channel.send("https://www.pixiv.net/artworks/" + result[n])
         });
     }
 
@@ -19,7 +19,6 @@ module.exports.run = async (bot, msg, c) => {
             let dataArray = result.split(",");
             let n = Math.floor(Math.random() * dataArray.length)
             
-            // console.log(dataArray[n].replace("\n", "").split("/"));
             p = dataArray[n].replace("\n", "").split("/")[7];
             
 
