@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const json = require('jsonfile');
 
-module.exports.run = async (bot, msg, c) => {
+module.exports.run = (bot, msg, c) => {
     const channel = msg.channel;
     if(c === 'gf'){
 

@@ -1,6 +1,6 @@
 const json = require('jsonfile');
 
-module.exports.run = async (bot, msg) => {
+module.exports.run = (bot, msg) => {
     const content = msg.content.split(" ");
     if (content[0] === '!del') {
         if (content.length !== 3) {

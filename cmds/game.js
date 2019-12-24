@@ -5,7 +5,7 @@ let gameflag = false;
 let author, answer, count = 20;
 let time, solvetime, solvetimesec, limitTime = 60000;
 
-module.exports.run = async (bot, msg) => {
+module.exports.run = (bot, msg) => {
 
     const content = msg.content;
 

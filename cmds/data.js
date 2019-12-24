@@ -1,6 +1,6 @@
 const json = require('jsonfile');
 
-module.exports.run = async (bot, msg) => {
+module.exports.run = (bot, msg) => {
     const authorid = msg.author.id;
     json.readFile('data.json', (err, result) => {
         if (err) throw err;
