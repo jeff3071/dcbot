@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     if(content[0] === '!t'){
-        json.readFile('cmds/t.json', (err, result) => {
+        json.readFile('data/t.json', (err, result) => {
             if(err) throw err;
 
             if(result[content[1]]){
@@ -24,7 +24,6 @@ module.exports.run = async (bot, msg) => {
                 }
                 msg.reply(s);
             }else{
-                // msg.reply('查無資料');
                 msg.reply('無此資料').then(message => {
                     message.delete(limitsearchtime)
                     msg.delete(limitsearchtime);

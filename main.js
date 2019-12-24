@@ -1,8 +1,5 @@
 const Discord = require('discord.js');
-const request = require('request');
-const cheerio = require('cheerio');
 const fs = require('fs');
-const json = require('jsonfile');
 
 const img = require('./cmds/img');
 const game = require('./cmds/game');
@@ -62,22 +59,14 @@ Client.on('message', async msg => {
 		img.run(Client, msg, 'sh')
 	}
 
-})
-
-Client.on('message', async msg => {
-	if (msg.author.bot) return;
-
-	const content = msg.content;
-
 	if(content === '%help'){
 		help.run(Client, msg);
 	}
+	
 	if(content === '%data'){
 		data.run(Client, msg);
 	}
 
 })
 
-// const test_token = "NDY1NTUxOTEwOTI2MTU1Nzc4.Dj9LqA.VZa_-RK_2gOp2kdGbSuZ01lYjZo";
 Client.login(process.env.BOT_TOKEN);
-// Client.login(test_token);

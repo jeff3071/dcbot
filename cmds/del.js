@@ -21,7 +21,7 @@ module.exports.run = async (bot, msg) => {
                 if (result[content[2]]) {
                     result[content[2]] = null;
                     delete result[content[2]];
-                    json.writeFile('cmds/t.json', result);
+                    json.writeFile('data/t.json', result);
                     msg.reply('刪除成功');
                 } else {
                     msg.reply('不存在');

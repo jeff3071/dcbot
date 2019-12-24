@@ -16,7 +16,7 @@ module.exports.run = async (bot, msg) => {
         }
 
         if(content[1] === 't'){
-             json.readFile('cmds/t.json', (err, result) => {
+             json.readFile('data/t.json', (err, result) => {
                 if(err) throw err;
 
                 let s = [];
@@ -28,7 +28,7 @@ module.exports.run = async (bot, msg) => {
                 if(!result[content[2]]){
                     result[content[2]] = s;
                     console.log(s);
-                    json.writeFile('cmds/t.json', result);
+                    json.writeFile('data/t.json', result);
                     msg.reply('成功寫入');
                 }else{
                     msg.reply('已經存在');
