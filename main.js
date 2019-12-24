@@ -30,14 +30,14 @@ Client.on('ready', () => {
 
 const gamechannel = '451387091214139393', gfchannel = '399414118030901248';
 
-Client.on('message', async msg => {
+Client.on('message', msg => {
 	if(msg.author.Client) return;
 	if(msg.channel.id !== gamechannel) return;
 
 	game.run(Client, msg);
 });
 
-Client.on('message', async msg => {
+Client.on('message', msg => {
 	if (msg.author.bot) return;
 	if (msg.channel.id !== gfchannel) return;
 
@@ -46,7 +46,7 @@ Client.on('message', async msg => {
 	del.run(Client, msg);
 });
 
-Client.on('message', async msg => {
+Client.on('message', msg => {
 	if (msg.author.bot) return;
 
 	const content = msg.content;
